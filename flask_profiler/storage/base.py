@@ -1,7 +1,7 @@
-
-
+# NOTE: Docstring should be more explicit
 class BaseStorage(object):
     """docstring for BaseStorage"""
+    # FIXME: Those methods should raise NotImplementedError not Exception.
     def __init__(self):
         super(BaseStorage, self).__init__()
 

@@ -2,9 +2,9 @@ import sqlite3
 import json
 from .base import BaseStorage
 from datetime import datetime
-from timeit import default_timer
+from timeit import default_timer  # Unused
 import time
-# from time import perf_counter
+# from time import perf_counter ## Comment Unnecessary just remove it (we are git)
 
 
 def formatDate(timestamp, dateFormat):
@@ -65,6 +65,7 @@ class Sqlite(BaseStorage):
         return filters
 
     def create_database(self):
+        # NOTE: Formating here is bad, one can split string declaration in format
         sql = '''CREATE TABLE {table_name}
             (
             ID Integer PRIMARY KEY AUTOINCREMENT,
@@ -117,6 +118,7 @@ class Sqlite(BaseStorage):
         sql = """INSERT INTO {0} VALUES (
             null, ?, ?, ?, ?,?, ?, ?, ?)""".format(self.table_name)
 
+        # NOTE: Bad indentation here.
         self.cursor.execute(sql, (
                 startedAt,
                 endedAt,
@@ -144,6 +146,7 @@ class Sqlite(BaseStorage):
         conditions = "where endedAt<={0} AND startedAt>={1} ".format(
             endedAt, startedAt)
 
+        # NOTE: Bad indentation here.
         sql = '''SELECT
                 startedAt, count(id) as count
             FROM "{table_name}" {conditions}
@@ -174,6 +177,7 @@ class Sqlite(BaseStorage):
         conditions = "where endedAt<={0} AND startedAt>={1} ".format(
             endedAt, startedAt)
 
+        # NOTE: Bad indentation here.
         sql = '''SELECT
                 method, count(id) as count
             FROM "{table_name}" {conditions}
@@ -245,6 +249,7 @@ class Sqlite(BaseStorage):
         return True if self.cursor.rowcount else False
 
     def delete(self, measurementId):
+        # NOTE: Bad indentation here.
         self.cursor.execute(
             'DELETE FROM "{table_name}" WHERE ID={measurementId}'.format(
                 table_name=self.table_name,
@@ -285,6 +290,7 @@ class Sqlite(BaseStorage):
 
         conditions = conditions.rstrip(" AND")
 
+        # NOTE: Bad indentation here.
         sql = '''SELECT
                 method, name,
                 count(id) as count,

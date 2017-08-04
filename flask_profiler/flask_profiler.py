@@ -1,5 +1,6 @@
 # -*- coding: utf8 -*-
 
+# NOTE: IMports are not ordered correctly
 import functools
 import re
 import time
@@ -21,7 +22,9 @@ auth = HTTPBasicAuth()
 
 logger = logging.getLogger("flask-profiler")
 
-_is_initialized = lambda: True if CONF else False
+# FIXME: (flake8 E731) see: https://goo.gl/EwvbwF
+def _is_initialized():
+    return True if CONF else False
 
 
 @auth.verify_password
@@ -125,6 +128,7 @@ def wrapHttpEndpoint(f):
     def wrapper(*args, **kwargs):
         context = {
             "url": request.base_url,
+            # QUESTION: Isn't request.args and request.form dicts ?
             "args": dict(request.args.items()),
             "form": dict(request.form.items()),
             "body": request.data.decode("utf-8", "strict"),
@@ -181,6 +185,7 @@ def registerInternalRouters(app):
         url_prefix="/" + urlPath,
         static_folder="static/dist/", static_url_path='/static/dist')
 
+    # FIXME: This line will never work, missing {} for string interpolation.
     @fp.route("/".format(urlPath))
     @auth.login_required
     def index():
@@ -244,8 +249,11 @@ def registerInternalRouters(app):
 def init_app(app):
     global collection, CONF
 
+    # NOTE: Allowing a case insensitive key add no value at all,
+    #       just document the right one.
     try:
         CONF = app.config["flask_profiler"]
+    # FIXME: The excepted error is KeyError, and one should avoid catching Exception
     except:
         try:
             CONF = app.config["FLASK_PROFILER"]

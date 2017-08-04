@@ -1,3 +1,4 @@
+# FIXME: Two datetime import
 import time
 import datetime
 import pymongo
@@ -20,6 +21,7 @@ class Mongo(BaseStorage):
         self.collection_name = self.config.get("COLLECTION", "measurements")
 
         def createIndex():
+            # NOTE: E123 closing bracket does't match indentation of opening one.
             self.collection.ensure_index(
                 [
                     ('startedAt', 1),
@@ -193,6 +195,7 @@ class Mongo(BaseStorage):
             }
         ])
 
+        # NOTE: C402 Unnecessary generator - rewrite as a dict comprehension.
         distribution = dict((i["method"], i["count"]) for i in result)
         return distribution
 
@@ -249,6 +252,7 @@ class Mongo(BaseStorage):
         obj["startedAt"] = obj["startedAt"].strftime("%s")
         obj["endedAt"] = obj["endedAt"].strftime("%s")
         for k, v in obj.items():
+            # NOTE: C407 — Unnecessary list comprehension - 'any' can take a generator.
             if any([isinstance(v, av_type) for av_type in available_types]):
                 continue
             if k == "_id":
