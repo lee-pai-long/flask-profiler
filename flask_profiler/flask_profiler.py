@@ -22,7 +22,8 @@ auth = HTTPBasicAuth()
 
 logger = logging.getLogger("flask-profiler")
 
-# FIXME: (flake8 E731) see: https://goo.gl/EwvbwF
+
+# FIX: (flake8 E731) see: https://goo.gl/EwvbwF
 def _is_initialized():
     return True if CONF else False
 
