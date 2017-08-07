@@ -1,9 +1,7 @@
-# FIXME: Two datetime import
 import time
 import datetime
 import pymongo
 from .base import BaseStorage
-import datetime
 from bson.objectid import ObjectId
 
 
