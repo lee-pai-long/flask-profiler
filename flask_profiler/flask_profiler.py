@@ -185,8 +185,7 @@ def registerInternalRouters(app):
         url_prefix="/" + urlPath,
         static_folder="static/dist/", static_url_path='/static/dist')
 
-    # FIXME: This line will never work, missing {} for string interpolation.
-    @fp.route("/".format(urlPath))
+    @fp.route("/{}".format(urlPath))
     @auth.login_required
     def index():
         return fp.send_static_file("index.html")
