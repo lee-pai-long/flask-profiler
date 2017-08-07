@@ -253,11 +253,10 @@ def init_app(app):
     #       just document the right one.
     try:
         CONF = app.config["flask_profiler"]
-    # FIXME: The excepted error is KeyError, and one should avoid catching Exception
-    except:
+    except KeyError:
         try:
             CONF = app.config["FLASK_PROFILER"]
-        except:
+        except KeyError:
             raise Exception(
                 "to init flask-profiler, provide "
                 "required config through flask app's config. please refer: "
