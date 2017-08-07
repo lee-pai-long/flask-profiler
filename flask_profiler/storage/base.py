@@ -1,21 +1,20 @@
 # NOTE: Docstring should be more explicit
 class BaseStorage(object):
     """docstring for BaseStorage"""
-    # FIXME: Those methods should raise NotImplementedError not Exception.
     def __init__(self):
         super(BaseStorage, self).__init__()
 
     def filter(self, criteria):
-        raise Exception("Not implemented Error")
+        raise NotImplementedError("Not implemented Error")
 
     def getSummary(self, criteria):
-        raise Exception("Not implemented Error")
+        raise NotImplementedError("Not implemented Error")
 
     def insert(self, measurement):
-        raise Exception("Not implemented Error")
+        raise NotImplementedError("Not implemented Error")
 
     def delete(self, measurementId):
-        raise Exception("Not implemented Error")
+        raise NotImplementedError("Not implemented Error")
 
     def truncate(self):
-        raise Exception("Not implemented Error")
+        raise NotImplementedError("Not implemented Error")
