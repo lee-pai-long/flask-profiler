@@ -272,4 +272,4 @@ def init_app(app):
 
     basicAuth = CONF.get("basicAuth", None)
     if not basicAuth or not basicAuth["enabled"]:
-        logging.warn(" * CAUTION: flask-profiler is working without basic auth!")
+        logging.warning(" * CAUTION: flask-profiler is working without basic auth!")
